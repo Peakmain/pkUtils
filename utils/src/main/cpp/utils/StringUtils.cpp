@@ -3,6 +3,7 @@
 //
 
 #include "../include/utils/StringUtils.h"
+#include <regex>
 
 /**
  * 拼接两个字符串
@@ -46,6 +47,12 @@ bool StringUtils::isOnlySpaces(const string &str) {
 
 //判断字符串是否包含某个子串
 bool StringUtils::contains(const string &str, const string &subStr) {
-    return str.find(subStr) != std::string::npos;
+    return str.find(subStr) != string::npos;
+
+}
+
+bool StringUtils::isNumeric(const string &str) {
+    regex pattern("^[0-9]*$");
+    return regex_match(str, pattern);
 
 }

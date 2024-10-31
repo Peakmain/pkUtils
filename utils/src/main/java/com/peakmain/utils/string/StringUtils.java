@@ -20,6 +20,12 @@ public class StringUtils {
         return isStringEmpty(str);
     }
 
+    public static boolean isNumeric(String str){
+        return isStringNumeric(str);
+    }
+
+    private static native boolean isStringNumeric(String str);
+
     private static native boolean isStringEmpty(String str);
 
     private static native boolean isCharEmpty(CharSequence input);

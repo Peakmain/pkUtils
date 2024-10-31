@@ -19,6 +19,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.e("TAG","当前是否为空:"+ StringUtils.isEmpty("AA"));
+        Log.e("TAG","当前是否为空:"+ StringUtils.isNumeric("11a"));
     }
 }

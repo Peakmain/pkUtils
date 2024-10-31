@@ -46,7 +46,7 @@ Java_com_atour_atourlife_utils_AESUtil_encodeBase64(JNIEnv *env, jclass clazz,
 extern "C"
 JNIEXPORT jboolean JNICALL
 Java_com_peakmain_utils_string_StringUtils_isStringEmpty(JNIEnv *env, jclass clazz, jstring str) {
-    const char *cStr = env->GetStringUTFChars(str,NULL);
+    const char *cStr = env->GetStringUTFChars(str, NULL);
 
     if (cStr == nullptr) {
         return true;
@@ -54,4 +54,12 @@ Java_com_peakmain_utils_string_StringUtils_isStringEmpty(JNIEnv *env, jclass cla
     std::string string(cStr);
     env->ReleaseStringUTFChars(str, cStr);
     return StringUtils::isEmpty(string);
+}
+extern "C"
+JNIEXPORT jboolean JNICALL
+Java_com_peakmain_utils_string_StringUtils_isStringNumeric(JNIEnv *env, jclass clazz, jstring str) {
+    const char *chars = env->GetStringUTFChars(str, NULL);
+    string result(chars);
+    env->ReleaseStringUTFChars(str,chars);
+    return StringUtils::isNumeric(result);
 }

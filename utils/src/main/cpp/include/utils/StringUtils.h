@@ -23,6 +23,8 @@ public:
 
     // 判断字符串是否包含某个子串
     static bool contains(const string& str, const string& subStr);
+    //是否是数字
+    static bool isNumeric(const string &str);
 
 };
 
