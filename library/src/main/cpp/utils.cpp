@@ -1,6 +1,7 @@
 #include <jni.h>
 #include <string>
 #include "../include/utils/Base64Encoder.h"
+#include "../include/utils/Base64Decoder.h"
 #include "../include/utils/StringUtils.h"
 #include "../utils/CommonStringUtils.h"
 
@@ -77,7 +78,6 @@ Java_com_peakmain_utils_string_StringUtils_nativeIsDate(JNIEnv *env, jclass claz
     string result = CommonStringUtils::getStringUTFChars(env, s1);
     return StringUtils::isDate(result);;
 }
-//————————————————————————————————————————————————————————String工具类 End————————————————————————————————————————————————————————
 
 
 extern "C"
@@ -114,4 +114,27 @@ JNIEXPORT jboolean JNICALL
 Java_com_peakmain_utils_string_StringUtils_nativeIsPhone(JNIEnv *env, jclass clazz, jstring str) {
     string result = CommonStringUtils::getStringUTFChars(env, str);
     return StringUtils::isPhone(result);
+}
+//————————————————————————————————————————————————————————String工具类 End————————————————————————————————————————————————————————
+
+//————————————————————————————————————————————————————————加密工具类 Start————————————————————————————————————————————————————————
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_peakmain_utils_encryption_Base64Utils_nativeEncode(JNIEnv *env, jclass clazz,
+                                                            jstring str) {
+    string result = CommonStringUtils::getStringUTFChars(env, str);
+    auto jResult = Base64Encoder::encode(result);
+    return env->NewStringUTF(jResult.c_str());
+}
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_peakmain_utils_encryption_Base64Utils_nativeDecoder(JNIEnv *env, jclass clazz,
+                                                             jstring encoded) {
+    string result = CommonStringUtils::getStringUTFChars(env, encoded);
+    Base64Decoder decoder;
+
+    std::string decoded = decoder.decode(result);
+    return env->NewStringUTF(decoded.c_str());
 }

@@ -32,6 +32,9 @@ add_library( # Sets the name of the library.
         SHARED
 
         utils/StringUtils.cpp
+        utils/Base64Encoder.cpp
+        utils/Base64Decoder.cpp
+
         # Provides a relative path to your source file(s).
         utils.cpp
         ${utils_list})
