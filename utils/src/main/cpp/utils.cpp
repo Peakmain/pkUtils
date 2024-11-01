@@ -79,3 +79,39 @@ Java_com_peakmain_utils_string_StringUtils_nativeIsDate(JNIEnv *env, jclass claz
 }
 //————————————————————————————————————————————————————————String工具类 End————————————————————————————————————————————————————————
 
+
+extern "C"
+JNIEXPORT jboolean JNICALL
+Java_com_peakmain_utils_string_StringUtils_nativeIsOnlySpaces(JNIEnv *env, jclass clazz,
+                                                              jstring str) {
+    string result = CommonStringUtils::getStringUTFChars(env, str);
+    return StringUtils::isOnlySpaces(result);
+}
+
+extern "C"
+JNIEXPORT jboolean JNICALL
+Java_com_peakmain_utils_string_StringUtils_nativeIsValidateIdCard(JNIEnv *env, jclass clazz,
+                                                                  jstring str) {
+    string result = CommonStringUtils::getStringUTFChars(env, str);
+    return StringUtils::isValidateIdCard(result);
+}
+extern "C"
+JNIEXPORT jboolean JNICALL
+Java_com_peakmain_utils_string_StringUtils_nativeIsPassword(JNIEnv *env, jclass clazz,
+                                                            jstring str) {
+    string result = CommonStringUtils::getStringUTFChars(env, str);
+    return StringUtils::isPassword(result);
+}
+
+extern "C"
+JNIEXPORT jboolean JNICALL
+Java_com_peakmain_utils_string_StringUtils_nativeIsEmail(JNIEnv *env, jclass clazz, jstring str) {
+    string result = CommonStringUtils::getStringUTFChars(env, str);
+    return StringUtils::isEmail(result);
+}
+extern "C"
+JNIEXPORT jboolean JNICALL
+Java_com_peakmain_utils_string_StringUtils_nativeIsPhone(JNIEnv *env, jclass clazz, jstring str) {
+    string result = CommonStringUtils::getStringUTFChars(env, str);
+    return StringUtils::isPhone(result);
+}

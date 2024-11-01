@@ -36,11 +36,41 @@ public class StringUtils {
     }
 
     public static boolean contains(String s1, String s2) {
-        return nativeContains(s1,s2);
+        return nativeContains(s1, s2);
     }
-    public static boolean isDate(String s1,String s2){
-        return nativeIsDate(s1,s2);
+
+    public static boolean isDate(String s1, String s2) {
+        return nativeIsDate(s1, s2);
     }
+
+    public static boolean isOnlySpaces(String str) {
+        return nativeIsOnlySpaces(str);
+    }
+
+    public static boolean isValidateIdCard(String str) {
+        return nativeIsValidateIdCard(str);
+    }
+
+    //是否是密码
+    public static boolean isPassword(String str) {
+        return nativeIsPassword(str);
+    }
+
+    //是否是邮箱
+    public static boolean isEmail(String str) {
+        return nativeIsEmail(str);
+    }
+
+    //是否是电话号码
+    public static boolean isPhone(String str) {
+        return nativeIsPhone(str);
+    }
+    private static native boolean nativeIsPassword(String str);
+    private static native boolean nativeIsEmail(String str);
+    private static native boolean nativeIsPhone(String str);
+    private static native boolean nativeIsValidateIdCard(String str);
+
+    private static native boolean nativeIsOnlySpaces(String str);
 
     private static native boolean nativeIsDate(String s1, String s2);
 
