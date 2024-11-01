@@ -2,7 +2,9 @@
 #include <string>
 #include "../include/utils/Base64Encoder.h"
 #include "../include/utils/StringUtils.h"
+#include "../utils/CommonStringUtils.h"
 
+//————————————————————————————————————————————————————————String工具类 Start————————————————————————————————————————————————————————
 bool isCharSequenceEmpty(JNIEnv *env, jobject input) {
     if (input == NULL) {
         return true;
@@ -23,43 +25,57 @@ bool isCharSequenceEmpty(JNIEnv *env, jobject input) {
 
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_com_peakmain_utils_string_StringUtils_isCharEmpty(JNIEnv *env, jclass clazz, jobject input) {
+Java_com_peakmain_utils_string_StringUtils_nativeIsCharEmpty(JNIEnv *env, jclass clazz,
+                                                             jobject input) {
     return isCharSequenceEmpty(env, input);
-
 }
 
-/*extern "C"
-JNIEXPORT jstring JNICALL
-Java_com_atour_atourlife_utils_AESUtil_encodeBase64(JNIEnv *env, jclass clazz,
-                                                    jbyteArray encrypted) {
-    jsize len = env->GetArrayLength(encrypted);
-    jbyte* data = env->GetByteArrayElements(encrypted, NULL);
-
-    std::vector<char> charData(data, data + len);
-    std::string encodedString = Base64Encoder::encode(charData);
-
-    env->ReleaseByteArrayElements(encrypted, data, 0);
-
-    return env->NewStringUTF(encodedString.c_str());
-}*/
 
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_com_peakmain_utils_string_StringUtils_isStringEmpty(JNIEnv *env, jclass clazz, jstring str) {
-    const char *cStr = env->GetStringUTFChars(str, NULL);
-
-    if (cStr == nullptr) {
-        return true;
-    }
-    std::string string(cStr);
-    env->ReleaseStringUTFChars(str, cStr);
-    return StringUtils::isEmpty(string);
+Java_com_peakmain_utils_string_StringUtils_nativeIsEmpty(JNIEnv *env, jclass clazz, jstring str) {
+    string result = CommonStringUtils::getStringUTFChars(env, str);
+    return StringUtils::isEmpty(result);
 }
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_com_peakmain_utils_string_StringUtils_isStringNumeric(JNIEnv *env, jclass clazz, jstring str) {
-    const char *chars = env->GetStringUTFChars(str, NULL);
-    string result(chars);
-    env->ReleaseStringUTFChars(str,chars);
+Java_com_peakmain_utils_string_StringUtils_nativeIsStringNumeric(JNIEnv *env, jclass clazz,
+                                                                 jstring str) {
+    string result = CommonStringUtils::getStringUTFChars(env, str);
     return StringUtils::isNumeric(result);
 }
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_peakmain_utils_string_StringUtils_nativeReplacePhone(JNIEnv *env, jclass clazz,
+                                                              jstring str) {
+    string result = CommonStringUtils::getStringUTFChars(env, str);
+    string replacePhoneResult = StringUtils::replacePhone(result);
+    return env->NewStringUTF(replacePhoneResult.c_str());
+}
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_peakmain_utils_string_StringUtils_nativeConcat(JNIEnv *env, jclass clazz, jstring s1,
+                                                        jstring s2) {
+    string ns1 = CommonStringUtils::getStringUTFChars(env, s1);
+    string ns2 = CommonStringUtils::getStringUTFChars(env, s2);
+    string result = StringUtils::concat(ns1, ns2);
+    return env->NewStringUTF(result.c_str());
+}
+extern "C"
+JNIEXPORT jboolean JNICALL
+Java_com_peakmain_utils_string_StringUtils_nativeContains(JNIEnv *env, jclass clazz, jstring s1,
+                                                          jstring s2) {
+    string ns1 = CommonStringUtils::getStringUTFChars(env, s1);
+    string ns2 = CommonStringUtils::getStringUTFChars(env, s2);
+    bool result = StringUtils::contains(ns1, ns2);
+    return result;
+
+}
+extern "C"
+JNIEXPORT jboolean JNICALL
+Java_com_peakmain_utils_string_StringUtils_nativeIsDate(JNIEnv *env, jclass clazz, jstring s1) {
+    string result = CommonStringUtils::getStringUTFChars(env, s1);
+    return StringUtils::isDate(result);;
+}
+//————————————————————————————————————————————————————————String工具类 End————————————————————————————————————————————————————————
+

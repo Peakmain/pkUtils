@@ -1,5 +1,7 @@
 package com.peakmain.apputils;
 
+import com.peakmain.utils.string.StringUtils;
+
 import java.util.concurrent.Callable;
 
 /**
@@ -10,19 +12,8 @@ import java.util.concurrent.Callable;
  */
 public class Test {
 
-    class MyThread implements Runnable{
-
-        @Override
-        public void run() {
-
-        }
-    }
-
-    class MyThread2 implements Callable<String>{
-
-        @Override
-        public String call() throws Exception {
-            return null;
-        }
+    public static void main(String[] args) {
+        String result = StringUtils.replacePhone("15156530025");
+        System.out.println(result);
     }
 }
