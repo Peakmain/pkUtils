@@ -25,6 +25,13 @@ include_directories(./include/utils)
 set(utils_dir ./src/utils)
 aux_source_directory(${utils_dir} utils_list)
 
+find_library(
+        log-lib
+
+        log)
+find_library(jnigraphics-lib
+        jnigraphics)
+
 add_library( # Sets the name of the library.
         pkUtils
 
@@ -39,12 +46,6 @@ add_library( # Sets the name of the library.
         utils.cpp
         ${utils_list})
 
-find_library(
-        log-lib
-
-        log)
-find_library(jnigraphics-lib
-        jnigraphics)
 
 target_link_libraries( # Specifies the target library.
         native-lib
