@@ -14,7 +14,15 @@ public class StringUtils {
     static {
         System.loadLibrary("pkUtils");
     }
-
+    /**
+     * 截取字符串通过Unicode编码
+     */
+    public static String subStringByCodePoints(String input, int maxLength) {
+        if (input == null || input.isEmpty()) return "";
+        int length = input.length();
+        int endIndex = input.offsetByCodePoints(0, Math.min(maxLength, input.codePointCount(0, length)));
+        return input.substring(0, endIndex);
+    }
     public static boolean isEmpty(CharSequence input) {
         return nativeIsCharEmpty(input);
     }
