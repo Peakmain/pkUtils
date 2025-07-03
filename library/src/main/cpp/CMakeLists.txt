@@ -41,6 +41,7 @@ add_library( # Sets the name of the library.
         utils/StringUtils.cpp
         utils/Base64Encoder.cpp
         utils/Base64Decoder.cpp
+        utils/CalendarUtils.cpp
 
         # Provides a relative path to your source file(s).
         utils.cpp
